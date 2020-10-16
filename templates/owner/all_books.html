@@ -1,0 +1,66 @@
+{% extends 'owner/base.html' %}
+
+
+{% block content %}
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-2">
+                <div class="list-group">
+                    <a href="{% url 'addcategory' %}" class="list-group list-group-item list-group-item-action">Add Category</a>
+                    <a href="{% url 'addbook' %}" class="list-group list-group-item list-group-item-action">Add Book</a>
+                    <a href="{% url 'allbook' %}" class="list-group list-group-item list-group-item-action">All Book</a>
+                    <a href="{% url 'allcategory' %}" class="list-group list-group-item list-group-item-action">All Category</a>
+                    <a href="{% url 'orderbook' %}" class="list-group list-group-item list-group-item-action">Order Book</a>
+                    <a href="{% url 'logout' %}" class="list-group list-group-item list-group-item-action">Logout</a>
+                </div>
+            </div>
+
+            {% if allbook %}
+
+            <div class="col-lg-9 mx-auto mt-3">
+            <div>
+                <form action="{% url 'serach' %}" method="get">
+                        <input type="text" class="mt-1" size="30" name="search" style="height:35px;" placeholder="Serch any Book">
+                        <input type="submit" class="btn btn-success mb-1" style="height:37px;">
+                </form>
+            </div>
+                <div class="card shadow-sm">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead class="text-center">
+                                <th>Id</th>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>ISBN No</th>
+                                <th>Category</th>
+                                <th>Quantity</th>
+                                <th>Action</th>
+                            </thead>
+                            {% for foo in allbook %}
+                            <tr class="text-center">
+                                <td>{{ foo.book_id }}</td>
+                                <td><img src="{{ foo.image.url }}" alt=""  height="100px" width="100px" style="border-radius: 20px"></td>
+                                <td>{{ foo.name }}</td>
+                                <td>{{ foo.isbn }}</td>
+                                <td>{{ foo.category.title }}</td>
+                                <td>{{ foo.qty }}</td>
+                                <td><a href="{% url 'update_book' foo.book_id %}" class="btn btn-success btn-sm">Update</a>
+                                    <a href="{% url 'order' foo.book_id %}" class="btn btn-primary btn-sm">Give</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            {% else %}
+                <div  class="mx-auto">
+                    <h2 class="mx-auto  mt-5">Book is not Avalable</h2>
+                    <a href="{% url 'allbook' %}" class="btn btn-primary">Continue</a>
+                </div>
+            {% endif %}
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

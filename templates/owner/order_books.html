@@ -1,0 +1,49 @@
+{% extends  'owner/base.html' %}
+
+
+{% block content %}
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-2">
+                <div class="list-group">
+                    <a href="{% url 'addcategory' %}" class="list-group list-group-item list-group-item-action">Add Category</a>
+                    <a href="{% url 'addbook' %}" class="list-group list-group-item list-group-item-action">Add Book</a>
+                    <a href="{% url 'allbook' %}" class="list-group list-group-item list-group-item-action">All Book</a>
+                    <a href="{% url 'allcategory' %}" class="list-group list-group-item list-group-item-action">All Category</a>
+                    <a href="{% url 'orderbook' %}" class="list-group list-group-item list-group-item-action">Order Book</a>
+                    <a href="{% url 'logout' %}" class="list-group list-group-item list-group-item-action">Logout</a>
+                </div>
+            </div>
+            <div class="col-lg-9 mx-auto mt-3">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <tr class="text-center">
+                                <th>Image</th>
+                                <th>Book Name</th>
+                                <th>Name</th>
+                                <th>Contact</th>
+                                <th>Email id</th>
+                                <th>Address</th>
+                                <th>Action</th>
+                            </tr>
+                            {% for foo in orderbook %}
+                            <tr class="text-center">
+                                <td><img src="{{ foo.book_id.image.url }}" alt=""  height="100px" width="100px" style="border-radius: 20px"></td>
+                                <td>{{ foo.book_id.name }}</td>
+                                <td>{{ foo.name }}</td>
+                                <td>{{ foo.contact }}</td>
+                                <td>{{ foo.email }}</td>
+                                <td>{{ foo.address }}</td>
+                                <td><a href="{% url 'remove_order' foo.order_id %}" class="btn btn-primary btn-sm">Delete</a></td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

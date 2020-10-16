@@ -1,0 +1,41 @@
+{% extends 'owner/base.html' %}
+
+
+{% block content %}
+    <div class="container-fluid p-0">
+        <div class="row no-gutters">
+            <div class="col-lg-2">
+                <div class="list-group">
+                    <a href="{% url 'addcategory' %}" class="list-group list-group-item list-group-item-action">Add Category</a>
+                    <a href="{% url 'addbook' %}" class="list-group list-group-item list-group-item-action">Add Book</a>
+                    <a href="{% url 'allbook' %}" class="list-group list-group-item list-group-item-action">All Book</a>
+                    <a href="{% url 'allcategory' %}" class="list-group list-group-item list-group-item-action">All Category</a>
+                    <a href="{% url 'orderbook' %}" class="list-group list-group-item list-group-item-action">Order Book</a>
+                    <a href="{% url 'logout' %}" class="list-group list-group-item list-group-item-action">Logout</a>
+                </div>
+            </div>
+
+
+            <div class="col-lg-5 mx-auto mt-4">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table">
+                            <thead>
+                                <th>Category Id</th>
+                                <th>Title</th>
+                            </thead>
+
+                            {% for x in category_list %}
+                            <tr>
+                                <td>{{ x.cat_id }}</td>
+                                <td>{{ x.title }}</td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
